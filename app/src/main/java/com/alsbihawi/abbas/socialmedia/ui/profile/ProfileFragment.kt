@@ -6,32 +6,29 @@ import android.widget.Toast
 import com.alsbihawi.abbas.socialmedia.databinding.FragmentProfileBinding
 import com.alsbihawi.abbas.socialmedia.ui.base.BaseFragment
 import com.alsbihawi.abbas.socialmedia.util.Constants
+import com.alsbihawi.abbas.socialmedia.util.PrefUtil.initPrefUtil
+import com.alsbihawi.abbas.socialmedia.util.PrefUtil.username
 
 class ProfileFragment:BaseFragment<FragmentProfileBinding>() {
     override val LOG_TAG: String=ProfileFragment::class.java.simpleName
     override val bindingInflater: (LayoutInflater) -> FragmentProfileBinding=FragmentProfileBinding::inflate
     override fun setUp() {
-        setUsername()
+        initPrefUtil(requireActivity())
+        loadingUsername()
         binding?.apply {
             buttonSave.setOnClickListener {
                 saveUsername()
                 Toast.makeText(context,inputName.text.toString(),Toast.LENGTH_SHORT).show()
-                setUsername()
+                loadingUsername()
             }
         }
     }
 
-    private fun setUsername() {
-        val sharedPreferences=  requireActivity().getSharedPreferences(Constants.SHARED_PREF_NAME,Context.MODE_PRIVATE)
-
-        binding?.textUsername?.text=sharedPreferences.getString(Constants.USERNAME,"")
+    private fun loadingUsername() {
+        binding?.textUsername?.text=username
     }
 
     private fun saveUsername() {
-      val sharedPreferences=  requireActivity().getSharedPreferences(Constants.SHARED_PREF_NAME,Context.MODE_PRIVATE)
-        val editor=sharedPreferences.edit()
-        val name=binding?.inputName?.text.toString()
-        editor.putString(Constants.USERNAME,name)
-        editor.apply()
+        username=binding?.inputName?.text.toString()
     }
 }
