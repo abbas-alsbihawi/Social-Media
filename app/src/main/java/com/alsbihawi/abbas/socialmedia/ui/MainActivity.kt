@@ -8,6 +8,7 @@ import com.alsbihawi.abbas.socialmedia.databinding.ActivityMainBinding
 import com.alsbihawi.abbas.socialmedia.ui.base.BaseActivity
 import com.alsbihawi.abbas.socialmedia.ui.home.HomeFragment
 import com.alsbihawi.abbas.socialmedia.ui.profile.ProfileFragment
+import com.alsbihawi.abbas.socialmedia.ui.search.SearchFragment
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>(){
@@ -34,7 +35,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(){
                     true
                 }
                 R.id.action_search->{
-                    replaceFragment(HomeFragment())
+                    replaceFragment(SearchFragment())
                     true
                 }
                 R.id.action_profile->{
